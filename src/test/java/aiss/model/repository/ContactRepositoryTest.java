@@ -2,6 +2,7 @@ package aiss.model.repository;
 
 import static org.junit.Assert.*;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,17 @@ public class ContactRepositoryTest {
 		assertNull("The contact has not been deleted", c);
 		assertTrue("The contact has not been delected correctly", newNumberContacts==numberContacts-1);
 	}
-			
+	
+	@Test
+	public void testContactNotFound() {
+		assertNull("The contact does not exist. Null should be returned", repository.getContact("InvalidID"));
+	}
+	
+	@Test (expected = InvalidParameterException.class) 
+	public void testDuplicatedContact() {
+		repository.addContact("Test name 3", "000000002");
+	}
+	
+	
 
 }

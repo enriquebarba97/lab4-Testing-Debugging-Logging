@@ -8,21 +8,22 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import aiss.controller.ContactUpdateController;
 import aiss.model.Contact;
 
-public class ContactRepository {
+public class ContactRepositoryBuggy {
 
-	private static final Logger log = Logger.getLogger(ContactRepository.class.getName());
+	private static final Logger log = Logger.getLogger(ContactRepositoryBuggy.class.getName());
 	
 	private Map<String,Contact> contacts;
-	private static ContactRepository instance=null;
+	private static ContactRepositoryBuggy instance=null;
 	private int index=0;			// Index to create contacts' identifiers.
 	
-	public static ContactRepository getInstance() {
+	public static ContactRepositoryBuggy getInstance() {
 		
 		if (instance==null) {
-			instance = new ContactRepository();
+			instance = new ContactRepositoryBuggy();
 			instance.init();
 		}
 		
@@ -55,13 +56,12 @@ public class ContactRepository {
 		}
 		// Create random id
 		String id = "c" + index;
-		Contact c = new Contact(id, name, telephone);
+		Contact c = new Contact(id, telephone, name);
 		contacts.put(id,c);
 		index++;
 		return c;
 	}
 
-	
 	public void deleteContact(String id) {
 		Contact c=contacts.get(id);
 		contacts.remove(id);

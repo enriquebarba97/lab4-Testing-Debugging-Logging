@@ -1,14 +1,11 @@
 package aiss.model.repository;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import aiss.controller.ContactUpdateController;
+
 import aiss.model.Contact;
 
 public class ContactRepository {

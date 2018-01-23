@@ -66,7 +66,7 @@
 
 		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
 		<plugins>
-			
+
 			<!-- Maven AppEngine plugin -->
 			<plugin>
 				<groupId>com.google.appengine</groupId>
@@ -81,12 +81,13 @@
 					<port>8090</port>
 					<!-- Comment in the below snippet to enable local debugging with a remote 
 						debugger like those included with Eclipse or IntelliJ -->
-					<jvmFlags> <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag> 
-						</jvmFlags>
+					<jvmFlags>
+						<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+					</jvmFlags>
 				</configuration>
 			</plugin>
 
-			<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static)-->
+			<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static) -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -122,11 +123,31 @@
 				</executions>
 			</plugin>
 
+			<!-- Code Coverage report generation -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-code-coverage-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static)-->
+				<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static) -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

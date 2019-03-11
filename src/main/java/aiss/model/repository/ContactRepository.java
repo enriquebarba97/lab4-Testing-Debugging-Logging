@@ -62,7 +62,7 @@ public class ContactRepository {
 	public void deleteContact(String id) {
 		Contact c=contacts.get(id);
 		contacts.remove(id);
-		log.log( Level.INFO, "El contacto "+c+" fué eliminado");
+		log.log(Level.INFO, "El contacto " + c + " fue eliminado");
 	}
 	
 	public Contact findByName(String name){

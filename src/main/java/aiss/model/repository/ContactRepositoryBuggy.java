@@ -52,7 +52,7 @@ public class ContactRepositoryBuggy {
 		}
 		// Create random id
 		String id = "c" + index;
-		Contact c = new Contact(id, telephone, name);
+		Contact c = new Contact(id, name, telephone);
 		contacts.put(id,c);
 		index++;
 		return c;

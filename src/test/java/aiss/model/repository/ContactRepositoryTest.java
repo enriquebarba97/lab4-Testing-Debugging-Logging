@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.security.InvalidParameterException;
 import java.util.Map;
 
 import org.junit.Before;
@@ -14,11 +15,11 @@ import aiss.model.Contact;
 
 public class ContactRepositoryTest {
 
-	private ContactRepository repository;
+	private ContactRepositoryBuggy repository;
 	
 	@Before
 	public void setUp() throws Exception {
-		repository=ContactRepository.getInstance();
+		repository=ContactRepositoryBuggy.getInstance();
 		repository.init();
 		repository.addContact("Test name 1", "000000000");
 		repository.addContact("Test name 2", "000000001");
@@ -80,5 +81,19 @@ public class ContactRepositoryTest {
 		
 		assertNull("The contact has not been deleted", c);
 		assertTrue("The contact has not been delected correctly", newNumberContacts==numberContacts-1);
+	}
+	
+	@Test
+	public void testContactNotFound() {
+		// Comprobar que intentar recuperar un contacto que no existe devuelve null
+		String id = "cne";
+		Contact c = repository.getContact(id);
+		assertNull("The repository returned something not expected", c);
+	}
+	
+	@Test (expected = InvalidParameterException.class)
+	public void testDuplicatedContact() {
+		// Añadir contacto que ya existe
+		repository.addContact("Test name 1", "000000000");
 	}
 }
